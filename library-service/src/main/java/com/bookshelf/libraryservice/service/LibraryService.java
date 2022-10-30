@@ -19,7 +19,6 @@ public class LibraryService {
 
     private final LibraryRepository libraryRepository;
     private final LibraryDtoConverter libraryDtoConverter;
-
     private final BookServiceClient bookServiceClient;
 
     public LibraryDto getAllBooksInLibraryById(Long id) {
