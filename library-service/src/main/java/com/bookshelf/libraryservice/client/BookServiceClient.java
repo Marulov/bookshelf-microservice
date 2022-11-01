@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface BookServiceClient {
 
     @GetMapping("/isbn/{isbn}")
-    ResponseEntity<BookIdDto> getBookByIsbn(@PathVariable String isbn);
+    ResponseEntity<BookIdDto> getBookByIsbn(@PathVariable("isbn") String isbn);
 
     @GetMapping("/{id}")
-    ResponseEntity<BookDto> getBookDetailsById(@PathVariable Long id);
+    ResponseEntity<BookDto> getBookDetailsById(@PathVariable("id") Long id);
 }

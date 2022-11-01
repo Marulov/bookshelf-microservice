@@ -8,6 +8,8 @@ import com.bookshelf.libraryservice.exception.LibraryNotFoundException;
 import com.bookshelf.libraryservice.model.Library;
 import com.bookshelf.libraryservice.repository.LibraryRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class LibraryService {
 
+    Logger logger = LoggerFactory.getLogger(LibraryService.class);
+
     private final LibraryRepository libraryRepository;
     private final LibraryDtoConverter libraryDtoConverter;
     private final BookServiceClient bookServiceClient;
@@ -25,6 +29,7 @@ public class LibraryService {
         Library library = libraryRepository.findById(id)
                 .orElseThrow(() -> new LibraryNotFoundException("Library not found by id: " + id));
 
+        logger.info("Get oll books in library by id: " + id);
         return new LibraryDto(library.getId(),
                 library.getUserBooks()
                         .stream()
@@ -43,7 +48,7 @@ public class LibraryService {
 
         Library library = libraryRepository.findById(request.getId())
                 .orElseThrow(() -> new LibraryNotFoundException("Library not found by id: " + request.getId()));
-
+        logger.info("Book add to library by isbn: " + request.getIsbn());
         library.getUserBooks().add(String.valueOf(bookId));
         libraryRepository.save(library);
     }

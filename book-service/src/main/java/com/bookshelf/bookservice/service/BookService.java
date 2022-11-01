@@ -7,6 +7,8 @@ import com.bookshelf.bookservice.exception.BookNotFoundException;
 import com.bookshelf.bookservice.model.Book;
 import com.bookshelf.bookservice.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookService {
 
+    Logger logger = LoggerFactory.getLogger(BookService.class);
     private final BookRepository bookRepository;
     private final BookDtoConverter bookDtoConverter;
 
@@ -23,6 +26,7 @@ public class BookService {
     }
 
     public BookIdDto getBookByIsbn(String isbn) {
+        logger.info("Book request by isbn: " + isbn);
         Book book = bookRepository.findBookByIsbn(isbn).orElseThrow(
                 () -> new BookNotFoundException("Book not found by isbn: " + isbn));
         return BookIdDto.builder()
