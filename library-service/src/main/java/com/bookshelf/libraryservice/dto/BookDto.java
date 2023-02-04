@@ -1,10 +1,12 @@
 package com.bookshelf.libraryservice.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BookDto {
     private Long id;
     private String title;
