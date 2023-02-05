@@ -38,7 +38,7 @@ class LibraryServiceTest {
 
     @DisplayName("Should Return LibraryDto With Detailed BookList With BookDto When LibraryId Exist")
     @Test
-    void ShouldReturnDetailedBookListWithBookDto_WhenLibraryIdExist() {
+    void shouldReturnDetailedBookListWithBookDto_WhenLibraryIdExist() {
         Long id = 1L;
         List<String> userBooks = Arrays.asList("1", "2", "3");
         Library library = new Library(id, userBooks);
@@ -66,7 +66,7 @@ class LibraryServiceTest {
 
     @DisplayName("Should Throw LibraryNotFoundException When LibraryId Does Not Exist")
     @Test
-    void ShouldThrowLibraryNotFoundException_WhenLibraryIdDoesNotExist() {
+    void shouldThrowLibraryNotFoundException_WhenLibraryIdDoesNotExist() {
         Long id = 1L;
 
         Mockito.when(libraryRepository.findById(id)).thenReturn(Optional.empty());
