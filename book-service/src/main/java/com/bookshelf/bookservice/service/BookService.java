@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookService {
 
-    Logger logger = LoggerFactory.getLogger(BookService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
     private final BookRepository bookRepository;
     private final BookDtoConverter bookDtoConverter;
 
@@ -26,13 +26,11 @@ public class BookService {
     }
 
     public BookIdDto getBookByIsbn(String isbn) {
-        logger.info("Book request by isbn: " + isbn);
+
+        LOGGER.info("Book request by isbn: {}", isbn);
         Book book = bookRepository.findBookByIsbn(isbn).orElseThrow(
                 () -> new BookNotFoundException("Book not found by isbn: " + isbn));
-        return BookIdDto.builder()
-                .id(book.getId())
-                .isbn(book.getIsbn())
-                .build();
+        return new BookIdDto(book.getId(), book.getIsbn());
     }
 
     public BookDto getBookDetailsById(Long id) {
